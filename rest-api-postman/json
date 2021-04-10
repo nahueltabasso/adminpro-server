@@ -1,0 +1,325 @@
+{
+	"info": {
+		"_postman_id": "49d5e3b4-c5c1-4ae8-9a2c-52e2635e7e55",
+		"name": "AdminPro",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Listar-Usuarios",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDZlNDM3N2ViMzQwMTExODBkMTE0NGUiLCJpYXQiOjE2MTc4Mzg5NjcsImV4cCI6MTYxNzg4MjE2N30.6jwb1QTgDE8Yyria2Sx33EYZ9onT15LPZB8aBTw2rPc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/usuario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"usuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear-Usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"USUARIO_TEST\",\r\n    \"apellido\": \"APELLIDO_TEST\",\r\n    \"email\": \"usuariotest@gmail.com\",\r\n    \"img\": null,\r\n    \"password\": \"abc123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/usuario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"usuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar-Usuario",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"role\": \"USER_ROLE\",\r\n    \"google\": false,\r\n    \"nombre\": \"USUARIO_TEST1\",\r\n    \"apellido\": \"APELLIDO_TEST12\",\r\n    \"email\": \"usuariotest1@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/usuario/606c9c98dc48fc3b28468ab0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"usuario",
+						"606c9c98dc48fc3b28468ab0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar-Usuario",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/usuario/606c9c98dc48fc3b28468ab0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"usuario",
+						"606c9c98dc48fc3b28468ab0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"usuariotest@gmail.com\",\r\n    \"password\": \"abc123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login-Google",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"1243325325\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar-Hospitales",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDZkZmIyMTRlOTY5MDQzZDA4ZDU5ZTIiLCJpYXQiOjE2MTc5MjYzODAsImV4cCI6MTYxNzk2OTU4MH0.2fAlTYkH0ArTyR3tLjxdnZc0XDPAAwACFWW0FV5qQp4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/hospital",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"hospital"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear-Hospital",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDZkZmIyMTRlOTY5MDQzZDA4ZDU5ZTIiLCJpYXQiOjE2MTc5MjYzODAsImV4cCI6MTYxNzk2OTU4MH0.2fAlTYkH0ArTyR3tLjxdnZc0XDPAAwACFWW0FV5qQp4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Hospital Sur\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/hospital",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"hospital"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear-Medico",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDZkZmIyMTRlOTY5MDQzZDA4ZDU5ZTIiLCJpYXQiOjE2MTc5MjYzODAsImV4cCI6MTYxNzk2OTU4MH0.2fAlTYkH0ArTyR3tLjxdnZc0XDPAAwACFWW0FV5qQp4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Nombre_Medico_b\",\r\n    \"apellido\": \"Apellido_Medico_b\",\r\n    \"hospital\": \"606f9afd3b27881b80ed02ea\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/medico",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"medico"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar-Medicos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDZkZmIyMTRlOTY5MDQzZDA4ZDU5ZTIiLCJpYXQiOjE2MTc5MjYzODAsImV4cCI6MTYxNzk2OTU4MH0.2fAlTYkH0ArTyR3tLjxdnZc0XDPAAwACFWW0FV5qQp4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/medico",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"medico"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busqueda-Total",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MDZkZmIyMTRlOTY5MDQzZDA4ZDU5ZTIiLCJpYXQiOjE2MTc5OTQ4MTQsImV4cCI6MTYxODAzODAxNH0.ngeUKwyhjZlszDes5g4WRz-DU-J6GZ-nMiLHZh6atDI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/todo/fernando",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"todo",
+						"fernando"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

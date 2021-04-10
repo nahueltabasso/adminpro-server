@@ -1,8 +1,8 @@
 const { response } = require('express');
-const usuario = require('../models/usuario');
 const Usuario = require('../models/usuario');
 const bcrypt = require('bcryptjs');
 const { generateJWT } = require('../helpers/jwt');
+const { googleVerify } = require('../helpers/googleVerify');
 
 const login = async(request, res = response) => {
     const { email, password } = request.body;
@@ -42,6 +42,53 @@ const login = async(request, res = response) => {
     }
 }
 
+const googleSignIn = async(request, res = response) => {
+    // Recuperar el token de Google 
+    const googleToken = request.body.token;
+
+    try {
+        const { name, email, picture } = await googleVerify(googleToken);
+
+        // Validamos si existe un usuario con el email
+        const usuarioDB = await Usuario.findOne({ email });
+        let usuario;
+
+        let nameCortado = name.split(' ');      // Sera un arreglo de 3 posiciones, la primera el nombre y la ultima el apellido
+        if (!usuarioDB) {
+            usuario = new Usuario({
+                nombre: nameCortado[0],
+                apellido: nameCortado[2],
+                password: '@@@',
+                email: email,
+                img: picture,
+                google: true
+            });
+        } else {
+            // Existe el usuario
+            usuario = usuarioDB;
+            usuario.google = true;
+        }
+
+        // Guardamos en la base de datos
+        await usuario.save();
+
+        // Generamos el JWT (JsonWebToken)
+        const jwtToken = await generateJWT(usuario.id);        
+
+        res.status(200).json({
+            ok: true,
+            token: jwtToken
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(401).json({
+            ok: false,
+            msg: 'Token no valido!'
+        });
+    }
+}
+
 module.exports = {
     login,
+    googleSignIn
 }
