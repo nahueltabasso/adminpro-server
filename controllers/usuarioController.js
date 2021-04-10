@@ -4,12 +4,22 @@ const bcrypt = require('bcryptjs');
 const { generateJWT } = require('../helpers/jwt');
 
 const getUsuarios = async(request, response) => {
+    const desde = Number(request.query.desde) || 0;
+    const totalPorPagina = Number(request.params.totalPorPagina) || 5;
+
     // Recuperamos los usuarios de la BD
-    const usuarios =  await Usuario.find({}, 'nombre apellido email role google');
+    const [ usuarios, totalRegistros ] = await Promise.all([
+        Usuario.find({}, 'nombre apellido email role google img')
+                .skip(desde)    // Ignora los registros anteriores al parametro "desde";
+                .limit(totalPorPagina),
+
+        Usuario.countDocuments()
+    ]);
 
     response.json({
         ok: true,
-        usuarios: usuarios
+        usuarios: usuarios,
+        totalRegistros: totalRegistros
     });
 }
 
