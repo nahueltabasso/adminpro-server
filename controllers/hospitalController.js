@@ -33,11 +33,58 @@ const crearHospital = async(request, res = response) => {
     }
 }
 
-const updateHospital = (request, res = response) => {
+const updateHospital = async(request, res = response) => {
+    const idHospital = request.params.id;
 
+    try {
+        let hospitalDB = await Hospital.findById(idHospital);
+        if (!hospitalDB) {
+            return res.status(404).json({
+                ok: false,
+                msg: 'No existe en la base de datos'
+            });
+        }
+
+        hospitalDB.nombre = request.body.nombre;
+        hospitalDB = await Hospital.findByIdAndUpdate(idHospital, hospitalDB, { new: true });
+
+        res.status(201).json({
+            ok: true,
+            hospital: hospitalDB
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Ocurrio un error. Consulte con el administrador!'
+        });
+    }
 }
 
-const deleteHospital = (request, res = response) => {
+const deleteHospital = async(request, res = response) => {
+    const idHospital = request.params.id;
+
+    try {
+        const hospitalDB = await Hospital.findById(idHospital);
+        if (!hospitalDB) {
+            return res.status(404).json({
+                ok: false,
+                msg: 'No existe en la base de datos'
+            });
+        }
+
+        await Hospital.findByIdAndDelete(idHospital);
+        res.status(204).json({
+            ok: true,
+            msg: 'Hospital eliminado con exito!'
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Ocurrio un error. Consulte con el administrador!'
+        });
+    }
 
 }
 

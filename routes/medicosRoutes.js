@@ -14,7 +14,7 @@ router.get('/', validarJwt, getMedicos);
 router.post('/', [ 
     validarJwt,     // El segundo parametro son los middlewares
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
-    check('nombre', 'El apellido es obligatorio').not().isEmpty(),
+    check('apellido', 'El apellido es obligatorio').not().isEmpty(),
     check('hospital', 'El Hospital es obligatorio').not().isEmpty(),
     check('hospital', 'El Hospital ID debe ser valido').isMongoId(),
     validarCampos,      // Custom Middleware
@@ -22,6 +22,8 @@ router.post('/', [
 router.put('/:id', [      // El segundo parametro son los middlewares
     validarJwt,
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
+    check('apellido', 'El apellido es obligatorio').not().isEmpty(),
+    check('hospital', 'El Hospital ID debe ser valido').isMongoId(),
     validarCampos,      // Custom Middleware
 ], updateMedico);
 router.delete('/:id', validarJwt, deleteMedico);
