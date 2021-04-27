@@ -4,7 +4,7 @@
 
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { getMedicos, addMedico, deleteMedico, updateMedico } = require('../controllers/medicoController');
+const { getMedicos, addMedico, deleteMedico, updateMedico, getMedicoById } = require('../controllers/medicoController');
 const { validarCampos } = require('../middlewares/validarCampos');
 const { validarJwt } = require('../middlewares/validarJWT');
 
@@ -27,5 +27,7 @@ router.put('/:id', [      // El segundo parametro son los middlewares
     validarCampos,      // Custom Middleware
 ], updateMedico);
 router.delete('/:id', validarJwt, deleteMedico);
+router.get('/:id', validarJwt, getMedicoById)
 
 module.exports = router;
+

@@ -4,7 +4,7 @@
 
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { getHospitales, crearHospital, deleteHospital, updateHospital } = require('../controllers/hospitalController');
+const { getHospitales, crearHospital, deleteHospital, updateHospital, getHospitalesForCombo } = require('../controllers/hospitalController');
 const { validarCampos } = require('../middlewares/validarCampos');
 const { validarJwt } = require('../middlewares/validarJWT');
 
@@ -22,5 +22,6 @@ router.put('/:id', [      // El segundo parametro son los middlewares
     validarCampos,      // Custom Middleware
 ], updateHospital);
 router.delete('/:id', validarJwt, deleteHospital);
+router.get('/hospitales-combo', validarJwt, getHospitalesForCombo);
 
 module.exports = router;

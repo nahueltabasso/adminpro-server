@@ -28,9 +28,9 @@ const searchInSpecificCollection = async(request, res = response) => {
     const busqueda = request.params.busqueda;
     const regex = new RegExp(busqueda, 'i');
 
-    const data = [];
+    let data = [];
 
-    switch (tabla) {
+    switch (collecion) {
         case 'medicos':
             data = await Medico.find({ nombre: regex })
                                 .populate('usuario', 'nombre apellido img')

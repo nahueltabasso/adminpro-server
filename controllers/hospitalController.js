@@ -2,12 +2,22 @@ const { response } = require('express');
 const Hospital = require('../models/hospital');
 
 const getHospitales = async(request, res = response) => {
-    const hospitales = await Hospital.find()
-                            .populate('usuario', 'nombre apellido email img');
+    const desde = Number(request.query.desde) || 0;
+    const totalPorPagina = Number(request.params.totalPorPagina) || 5;
+
+    const [ hospitales, totalRegistros ] = await Promise.all([
+        Hospital.find()
+        .skip(desde)
+        .limit(totalPorPagina)
+        .populate('usuario', 'nombre apellido email img'),
+
+        Hospital.countDocuments()
+    ]);
 
     res.status(200).json({
         ok: true, 
-        hospitales: hospitales
+        hospitales: hospitales,
+        totalRegistros: totalRegistros
     });
 }
 
@@ -88,10 +98,29 @@ const deleteHospital = async(request, res = response) => {
 
 }
 
+const getHospitalesForCombo = async(request, res = response) => {
+    try {
+        const hospitales = await Hospital.find();
+        
+        res.status(200).json({
+            ok: true,
+            hospitales: hospitales
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Ocurrio un error. Consulte con el administrador!'
+        });
+    }
+}
+
+
 
 module.exports = {
     getHospitales,
     crearHospital,
     updateHospital,
-    deleteHospital
+    deleteHospital,
+    getHospitalesForCombo
 }

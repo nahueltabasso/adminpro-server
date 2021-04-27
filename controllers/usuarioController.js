@@ -2,6 +2,7 @@ const { response } = require('express');
 const Usuario = require('../models/usuario');
 const bcrypt = require('bcryptjs');
 const { generateJWT } = require('../helpers/jwt');
+const usuario = require('../models/usuario');
 
 const getUsuarios = async(request, response) => {
     const desde = Number(request.query.desde) || 0;
@@ -90,7 +91,10 @@ const actualizarUsuario = async(request, res = response) => {
         
         // delete campos.password;
         // delete campos.google;
-        campos.email = email;
+        if (!usuarioDB.google) {
+            // Solo los usuarios que no se loguean o registran con google pueden cambiar su correo
+            campos.email = email;
+        }
 
         const usuarioActualizado = await Usuario.findByIdAndUpdate(uid, campos, { new: true });
         res.json({
