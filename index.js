@@ -27,6 +27,10 @@ app.use('/api/medico', require('./routes/medicosRoutes'));
 app.use('/api/todo', require('./routes/searchRoutes'));
 app.use('/api/uploads', require('./routes/uploadRoutes'));
 
+app.get('*', (req, res) => {
+    res.sendFile( path.resolve( __dirname, 'public/index.html' ) );
+});
+
 app.listen(3000, () => {
     console.log('Servidor corriendo en puerto ' + process.env.PORT);
 });
